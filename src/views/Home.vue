@@ -1,18 +1,44 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+
+      <video id="player"  preload="auto" controls class="video-js vjs-default-skin vjs-big-play-centered">
+
+          <p class="vjs-no-js">
+              no support
+          </p>
+          <source src="http://localhost/hls/test/index.m3u8"  type="application/x-mpegURL" />
+
+      </video>
+
+
   </div>
 </template>
 
 <script lang="ts">
+import videojs from 'video.js'
+
+import 'video.js/dist/video-js.css'
+import 'videojs-contrib-hls'
+
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+
 
 @Options({
   components: {
-    HelloWorld
+
   }
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+    player:any
+
+  mounted() {
+      this.player = videojs('player',{
+          width:1000,
+          height:600
+      });
+      console.log(this.player)
+
+  }
+
+}
 </script>
