@@ -1,10 +1,12 @@
 <template>
+
   <div class="home">
 
       <video id="player"  preload="auto" controls class="video-js vjs-default-skin vjs-big-play-centered">
 
           <p class="vjs-no-js">
               no support
+
           </p>
           <source src="http://localhost/hls/test/index.m3u8"  type="application/x-mpegURL" />
 

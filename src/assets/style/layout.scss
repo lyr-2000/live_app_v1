@@ -1,0 +1,33 @@
+//a标签样式
+@mixin a-link-color{
+  text-decoration: none;
+  color: #333;
+}
+@mixin a-link-hover{
+  cursor: pointer;
+}
+@mixin a-link-hover-red{
+  @include a-link-hover;
+  color: red;
+
+}
+//布局样式
+@mixin flex-row{
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-row-between {
+  @include flex-row;
+  justify-content: space-between;
+}
+@mixin flex-row-around{
+  @include flex-row;
+  justify-content: space-around;
+}
+
+@mixin flex-col{
+  display: flex;
+  flex-direction: column;
+}
+

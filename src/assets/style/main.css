@@ -1,0 +1,14 @@
+/*
+取消 bootstrap点击阴影
+*/
+
+.btn:focus{
+    box-shadow:none!important;
+
+}
+
+.form-control:focus{
+    /*border-color:#fff;*/
+    border-color: blue;
+    box-shadow:none;
+}
