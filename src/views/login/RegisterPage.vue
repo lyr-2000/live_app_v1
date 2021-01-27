@@ -11,17 +11,17 @@
                 </section>
                 <section class="field">
                     <i class="iconfont  icon-email"></i>
-                    <input type="text" class="email-input" placeholder="输入邮箱">
+                    <input type="text" class="email-input" placeholder="输入邮箱" v-model="email">
                     <i class="iconfont  icon-smile"></i>
-                    <input type="text" class="nickname-input" placeholder="输入昵称">
+                    <input type="text" class="nickname-input" placeholder="输入昵称" v-model="nickname">
                     <i class="iconfont  icon-key"></i>
-                    <input type="password" class="pwd-input" placeholder="输入密码">
+                    <input type="password" class="pwd-input" placeholder="输入密码" v-model="password">
                     <i class="iconfont  icon-safe"></i>
-                    <input type="text" class="vcode-input" placeholder="输入验证码">
-
+                    <input type="text" class="vcode-input" placeholder="输入验证码" v-model="code">
+                    <a href="javascript:void(0)" @click.prevent="getCode" class="get-code">获取验证码</a>
                 </section>
                 <section class="btn-field">
-                    <div class="login-button">注册</div>
+                    <div class="login-button" @click="registerUser">注册</div>
                 </section>
                 <section class="read-it"></section>
             </form>
@@ -33,7 +33,9 @@
 <script lang="ts">
     import NavBar from '@/components/navbar/NavBar.vue';
     import { Options, Vue} from "vue-class-component";
-
+    import { getCode,registerByCode } from '@/common/api/useRegisterUser.ts'
+    import RegisterUser from "@/common/domain/RegisterUser";
+    import {Result} from "@/common/domain/Result";
 
     @Options({
         components:{
@@ -41,8 +43,63 @@
         }
 
     })
+
+    /*
+    * {
+  "code": 200,
+  "message": "ok",
+  "data": {
+    "id": 34,
+    "nickname": "666",
+    "account": "4083361810949683630",
+    "email": "1957476540@qq.com"
+  }
+}
+    *
+    * */
     export default class RegisterPage extends Vue {
 
+        email="";
+        nickname=""
+        password = ""
+        //验证码
+        code = ""
+
+        id?:number
+        registerUser() {
+            registerByCode({
+                id:this.id,
+                code:this.code
+            }).then(res=>{
+                const data = res.data
+                console.log(data)
+                if (data.code==200) {
+                    console.log("登录成功")
+                    this.$router.push({
+                        path:"/login"
+                    })
+                }
+            })
+        }
+        //获取验证码
+        getCode() {
+            // console.log(this.email)
+
+            getCode({
+                email:this.email,
+                nickname:this.nickname,
+                password:this.password,
+
+            }).then(resp =>{
+                 const data = resp.data
+                 if (data.code==200)this.id = data.data.id;
+                 else{
+                     console.log("请求失败")
+                 }
+            })
+
+
+        }
 
     }
 </script>
@@ -74,6 +131,9 @@
 
             & .right{
                 margin-top: 8px;
+                & a:hover {
+                    text-decoration: none;
+                }
             }
         }
         & .iconfont {
@@ -107,6 +167,20 @@
                 margin-top: 26px;
                 width: 361px;
             }
+            .login-button:hover {
+                background-color: #ec4556;
+            }
         }
+
+        & a.get-code {
+            @include a-link-color;
+            position: absolute;
+            right: 58px;
+            bottom: 171px;
+        }
+        & a.get-code:hover{
+            @include a-link-hover-red;
+        }
+
     }
 </style>

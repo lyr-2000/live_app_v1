@@ -4,7 +4,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/home",
-    name: "Home",
+    name: "home",
     component: ()=>import('@/views/Home.vue')
   },
   {
@@ -29,5 +29,15 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 });
+
+router.beforeEach((to,from,next)=>{
+  console.log(to)
+  if(to.name == 'home') next({name:'loginPage'})
+  else next()
+})
+
+
+
+
 
 export default router;

@@ -12,14 +12,14 @@
         <div class="search-bar  nav-link" v-show="inputShow">
             <form >
                 <input type="text" class="search-inpu form-control">
-                <button class="btn btn-warning"> <i class="fas fa-search"></i>搜索</button>
+                <button class="btn btn-warning"> <i class="iconfont icon-sousuo"></i>搜索</button>
             </form>
         </div>
 
-        <div class="login_link"  v-if="false">
+        <div class="login_link"  v-if="loginLinkShow">
             <router-link tag="a" to="/login"   class="nav-link">登录/注册</router-link>
         </div>
-        <div class="avatar login_link" v-if="loginLinkShow">
+        <div class="avatar login_link" v-if="false">
             用户001
             <img src="https://tx-free-imgs.acfun.cn/style/image/defaultAvatar.jpg?imageslim" alt="">
         </div>
@@ -67,6 +67,7 @@
         height: $nav-height;
         line-height: 25px;
         margin: auto;
+        overflow: hidden;
         & h1{
             font-size: 135%;
         }
