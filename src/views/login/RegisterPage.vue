@@ -1,7 +1,7 @@
 <template>
     <nav-bar/>
     <div id="background_body">
-        注册页面
+<!--        注册页面-->
 
         <div class="register-form">
             <form >

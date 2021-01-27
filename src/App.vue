@@ -1,7 +1,7 @@
 <template>
   <div id="website">
     <router-view></router-view>
-<!--    <modal  />-->
+    <modal  />
     <loading />
   </div>
 

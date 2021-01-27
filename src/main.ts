@@ -23,6 +23,10 @@ import '@/assets/icon/iconfont.css'
 import axios from "axios";
 import {apiUrl} from "@/common/config";
 import {loadingModule} from '@/store/modules/Loading.ts'
+
+// import videojs from "video.js";
+// import use = videojs.use;
+
 axios.defaults.baseURL = apiUrl
 axios.interceptors.request.use(config => {
     loadingModule.setLoading(true)
@@ -46,8 +50,8 @@ axios.interceptors.response.use(config => {
 
 const app = createApp(App)
   .use(store)
-  .use(router);
-
+  .use(router)
+  // .use(animate)
 
 
 app.mount("#app");
