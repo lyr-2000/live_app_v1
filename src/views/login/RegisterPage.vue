@@ -66,6 +66,7 @@
         code = ""
 
         id?:number
+        //注册-> 跳转登录页面
         registerUser() {
             registerByCode({
                 id:this.id,

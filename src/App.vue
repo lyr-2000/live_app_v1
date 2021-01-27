@@ -1,7 +1,7 @@
 <template>
   <div id="website">
     <router-view></router-view>
-    <modal />
+<!--    <modal  />-->
     <loading />
   </div>
 
@@ -12,7 +12,7 @@
   import {Options, Vue} from "vue-class-component";
   @Options({
     components:{
-      Modal,Loading
+       Loading,Modal
     }
   })
   export default class App extends Vue{
