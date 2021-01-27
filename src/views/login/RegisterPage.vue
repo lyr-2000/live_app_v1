@@ -18,7 +18,8 @@
                     <input type="password" class="pwd-input" placeholder="输入密码" v-model="password">
                     <i class="iconfont  icon-safe"></i>
                     <input type="text" class="vcode-input" placeholder="输入验证码" v-model="code">
-                    <a href="javascript:void(0)" @click.prevent="getCode" class="get-code">获取验证码</a>
+                    <a href="javascript:void(0)" @click.prevent="getCode" class="get-code" v-show="!prevent">获取验证码</a>
+                    <a class="get-code countdown" v-show="prevent">{{countdownSecond}}</a>
                 </section>
                 <section class="btn-field">
                     <div class="login-button" @click="registerUser">注册</div>
@@ -66,6 +67,8 @@
         code = ""
 
         id?:number
+
+        prevent= false
         //注册-> 跳转登录页面
         registerUser() {
             registerByCode({
@@ -97,8 +100,28 @@
                  else{
                      console.log("请求失败")
                  }
+                 this.prevent = true
+                this.countDown()
+            }).catch(err=>{
+                this.prevent = true
+                this.countDown()
             })
 
+
+        }
+        countdownSecond = 60
+        //屏蔽，防止重新点击验证码
+        countDown() {
+            this.countdownSecond = 60
+            const timer = setInterval(()=>{
+                if (this.countdownSecond>=1) {
+                    this.countdownSecond--;
+                }else{
+                    this.prevent = false
+
+                    clearInterval(timer);
+                }
+            },1000)
 
         }
 
@@ -181,6 +204,9 @@
         }
         & a.get-code:hover{
             @include a-link-hover-red;
+        }
+        & a.countdown {
+            color: blue;
         }
 
     }
